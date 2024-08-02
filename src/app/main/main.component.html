@@ -20,5 +20,10 @@ border-b border-0 border-solid border-gray-300 ">
 hover:text-red-500"
                 fontIcon="delete" inline/>
     </div>
+  } @empty {
+    <!-- if the list is empty and tasks are still loading -->
+    <div *ngIf="isLoading" class="text-center">
+      Please wait, we are loading your tasks
+    </div>
   }
 </div>

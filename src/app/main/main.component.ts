@@ -9,6 +9,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-main',
@@ -21,7 +22,8 @@ import {FormsModule} from "@angular/forms";
     MatInput,
     MatLabel,
     MatButton,
-    FormsModule
+    FormsModule,
+    NgIf
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
@@ -30,6 +32,8 @@ export class MainComponent {
 
   taskList: Array<Task> = [];
   description = "";
+
+  isLoading = true;
 
   /* getting form reference */
   @ViewChild("frm")
@@ -43,6 +47,7 @@ export class MainComponent {
     taskService.getTasks(authService.getPrincipalEmail()!).subscribe(
       taskList => {
         this.taskList = taskList;
+        this.isLoading = false; /* tasks finished loading */
         this.taskList.sort(
           /* compare function
           * to sort in descending order of task added time */
